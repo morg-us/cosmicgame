@@ -1,12 +1,29 @@
 let scene, camera, renderer, controls;
+let gameStarted = false;
+
 let moveForward = false, moveBackward = false;
 let moveLeft = false, moveRight = false;
 let velocity = new THREE.Vector3();
 
-init();
-animate();
+initMenu();
 
-function init() {
+function initMenu() {
+  document.getElementById("startBtn").addEventListener("click", startGame);
+}
+
+function startGame() {
+  document.getElementById("menu").style.display = "none";
+  document.getElementById("crosshair").style.display = "block";
+
+  initGame();
+  animate();
+
+  document.body.addEventListener("click", () => {
+    controls.lock();
+  });
+}
+
+function initGame() {
   scene = new THREE.Scene();
   scene.background = new THREE.Color(0x111111);
 
@@ -22,11 +39,6 @@ function init() {
   document.body.appendChild(renderer.domElement);
 
   controls = new THREE.PointerLockControls(camera, document.body);
-
-  document.body.addEventListener("click", () => {
-    controls.lock();
-  });
-
   scene.add(controls.getObject());
 
   // Işık
@@ -51,27 +63,31 @@ function init() {
 
   document.addEventListener("keydown", onKeyDown);
   document.addEventListener("keyup", onKeyUp);
+
+  gameStarted = true;
 }
 
-function onKeyDown(event) {
-  if (event.code === "KeyW") moveForward = true;
-  if (event.code === "KeyS") moveBackward = true;
-  if (event.code === "KeyA") moveLeft = true;
-  if (event.code === "KeyD") moveRight = true;
+function onKeyDown(e) {
+  if (!gameStarted) return;
+  if (e.code === "KeyW") moveForward = true;
+  if (e.code === "KeyS") moveBackward = true;
+  if (e.code === "KeyA") moveLeft = true;
+  if (e.code === "KeyD") moveRight = true;
 }
 
-function onKeyUp(event) {
-  if (event.code === "KeyW") moveForward = false;
-  if (event.code === "KeyS") moveBackward = false;
-  if (event.code === "KeyA") moveLeft = false;
-  if (event.code === "KeyD") moveRight = false;
+function onKeyUp(e) {
+  if (e.code === "KeyW") moveForward = false;
+  if (e.code === "KeyS") moveBackward = false;
+  if (e.code === "KeyA") moveLeft = false;
+  if (e.code === "KeyD") moveRight = false;
 }
 
 function animate() {
+  if (!gameStarted) return;
+
   requestAnimationFrame(animate);
 
   velocity.set(0, 0, 0);
-
   if (moveForward) velocity.z -= 0.1;
   if (moveBackward) velocity.z += 0.1;
   if (moveLeft) velocity.x -= 0.1;
