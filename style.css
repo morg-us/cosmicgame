@@ -1,9 +1,73 @@
 body {
   margin: 0;
   overflow: hidden;
+  font-family: Arial, sans-serif;
   background: black;
 }
 
+/* ANA MENÜ */
+#menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.9);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#menu h1 {
+  font-size: 48px;
+  margin-bottom: 40px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+}
+
+button:hover {
+  background: #555;
+  color: white;
+}
+
+#profile {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.xp-bar {
+  width: 120px;
+  height: 10px;
+  background: #333;
+  margin-top: 5px;
+}
+
+.xp-fill {
+  width: 40%;
+  height: 100%;
+  background: lime;
+}
+
+#settingsBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+/* CROSSHAIR */
 #crosshair {
   position: fixed;
   top: 50%;
@@ -11,5 +75,5 @@ body {
   transform: translate(-50%, -50%);
   color: white;
   font-size: 24px;
-  user-select: none;
+  display: none;
 }
