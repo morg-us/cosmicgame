@@ -1,9 +1,13 @@
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js";
+import { PointerLockControls } from "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/controls/PointerLockControls.js";
+
 let scene, camera, renderer, controls;
 let gameStarted = false;
 
-let moveForward = false, moveBackward = false;
-let moveLeft = false, moveRight = false;
-let velocity = new THREE.Vector3();
+let moveForward = false;
+let moveBackward = false;
+let moveLeft = false;
+let moveRight = false;
 
 initMenu();
 
@@ -16,15 +20,12 @@ function startGame() {
   document.getElementById("crosshair").style.display = "block";
 
   initGame();
+  animate();
 
-  setTimeout(() => {
-    animate();
-    document.body.addEventListener("click", () => {
-      controls.lock();
-    });
-  }, 100);
+  document.body.addEventListener("click", () => {
+    controls.lock();
+  });
 }
-
 
 function initGame() {
   scene = new THREE.Scene();
@@ -33,20 +34,19 @@ function initGame() {
   camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
-    1,
+    0.1,
     1000
   );
 
   renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
-
   renderer.domElement.style.position = "fixed";
   renderer.domElement.style.top = "0";
   renderer.domElement.style.left = "0";
   renderer.domElement.style.zIndex = "1";
+  document.body.appendChild(renderer.domElement);
 
-  controls = new THREE.PointerLockControls(camera, document.body);
+  controls = new PointerLockControls(camera, document.body);
   scene.add(controls.getObject());
 
   // Işık
@@ -61,7 +61,7 @@ function initGame() {
   floor.rotation.x = -Math.PI / 2;
   scene.add(floor);
 
-  // Test objesi
+  // Test küp
   const box = new THREE.Mesh(
     new THREE.BoxGeometry(),
     new THREE.MeshStandardMaterial({ color: 0xff0000 })
@@ -92,17 +92,12 @@ function onKeyUp(e) {
 
 function animate() {
   if (!gameStarted) return;
-
   requestAnimationFrame(animate);
 
-  velocity.set(0, 0, 0);
-  if (moveForward) velocity.z -= 0.1;
-  if (moveBackward) velocity.z += 0.1;
-  if (moveLeft) velocity.x -= 0.1;
-  if (moveRight) velocity.x += 0.1;
-
-  controls.moveRight(velocity.x);
-  controls.moveForward(velocity.z);
+  if (moveForward) controls.moveForward(0.1);
+  if (moveBackward) controls.moveForward(-0.1);
+  if (moveLeft) controls.moveRight(-0.1);
+  if (moveRight) controls.moveRight(0.1);
 
   renderer.render(scene, camera);
 }
