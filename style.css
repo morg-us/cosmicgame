@@ -77,3 +77,14 @@ button:hover {
   font-size: 24px;
   display: none;
 }
+canvas {
+  z-index: 1;
+}
+
+#menu {
+  z-index: 10;
+}
+
+#crosshair {
+  z-index: 5;
+}
