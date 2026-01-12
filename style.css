@@ -1,1 +1,49 @@
+:root { --neon: #00ffcc; --bg-glass: rgba(0, 0, 0, 0.85); }
 
+body, html { 
+    margin: 0; padding: 0; width: 100vw; height: 100vh; 
+    background: #000; overflow: hidden; font-family: 'Segoe UI', sans-serif; 
+}
+
+/* Katman 1: 3D Sahne */
+#canvas-container { position: absolute; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; }
+
+/* Katman 2: Sinematik Efekt */
+.overlay-vignette {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+    z-index: 5; pointer-events: none;
+}
+
+/* Katman 3: UI (En Üstte kalmasını sağlar) */
+#ui-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10; display: flex; align-items: flex-end; padding: 40px; box-sizing: border-box;
+}
+
+.lobby-content { width: 100%; display: flex; justify-content: space-between; align-items: flex-end; }
+
+/* Sol Kartlar */
+.characters-ui { display: flex; gap: 20px; }
+.info-box {
+    background: var(--bg-glass); border-left: 4px solid var(--neon);
+    padding: 15px 25px; width: 200px; backdrop-filter: blur(10px);
+}
+.label { color: var(--neon); font-size: 10px; letter-spacing: 2px; font-weight: bold; }
+.name { color: white; font-size: 24px; margin: 5px 0; font-weight: 900; }
+.status { color: #666; font-size: 10px; margin: 0; }
+
+/* Sağ Menü */
+.menu-ui { width: 320px; text-align: right; }
+.logo-section h1 { color: white; font-size: 32px; margin: 0; font-weight: 200; }
+.logo-section span { font-weight: 900; color: var(--neon); }
+.logo-section small { color: #333; letter-spacing: 3px; }
+
+.nav-section { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
+.btn-primary {
+    background: var(--neon); color: black; border: none; padding: 18px;
+    font-weight: 900; font-size: 16px; cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+}
+.btn-secondary { background: rgba(255,255,255,0.05); border: 1px solid #222; color: white; padding: 12px; cursor: pointer; }
+.btn-text { background: transparent; border: none; color: #444; cursor: pointer; font-size: 12px; }
