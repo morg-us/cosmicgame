@@ -2,10 +2,32 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <title>Jack & Thomas – Prototype</title>
+  <title>Jack & Thomas</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+  <!-- ANA MENÜ -->
+  <div id="menu">
+    <h1>Jack & Thomas</h1>
+
+    <div class="buttons">
+      <button id="startBtn">▶ Başla</button>
+      <button>🛒 Market</button>
+      <button>🎒 Envanter</button>
+    </div>
+
+    <div id="profile">
+      <p>Seviye: 1</p>
+      <div class="xp-bar">
+        <div class="xp-fill"></div>
+      </div>
+    </div>
+
+    <button id="settingsBtn">⚙</button>
+  </div>
+
+  <!-- CROSSHAIR -->
   <div id="crosshair">+</div>
 
   <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
@@ -13,4 +35,3 @@
   <script src="main.js"></script>
 </body>
 </html>
-
