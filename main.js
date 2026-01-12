@@ -1,7 +1,7 @@
-console.log("MODULE ÇALIŞIYOR");
-
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js";
 import { PointerLockControls } from "https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/controls/PointerLockControls.js";
+
+console.log("THREE YÜKLENDİ", THREE);
 
 let scene, camera, renderer, controls;
 let gameStarted = false;
