@@ -16,12 +16,15 @@ function startGame() {
   document.getElementById("crosshair").style.display = "block";
 
   initGame();
-  animate();
 
-  document.body.addEventListener("click", () => {
-    controls.lock();
-  });
+  setTimeout(() => {
+    animate();
+    document.body.addEventListener("click", () => {
+      controls.lock();
+    });
+  }, 100);
 }
+
 
 function initGame() {
   scene = new THREE.Scene();
