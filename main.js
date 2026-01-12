@@ -38,6 +38,11 @@ function initGame() {
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
+  renderer.domElement.style.position = "fixed";
+  renderer.domElement.style.top = "0";
+  renderer.domElement.style.left = "0";
+  renderer.domElement.style.zIndex = "1";
+
   controls = new THREE.PointerLockControls(camera, document.body);
   scene.add(controls.getObject());
 
